@@ -1,3 +1,8 @@
+body{
+    
+    background-image: linear-gradient(to top, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%);
+}
+
 .container{
     display: grid;
     grid-gap: 50px;
@@ -6,14 +11,104 @@
 
 }
 
+
+
 .header{
 display: grid;
 justify-content: center;
 align-items: center;
-background-color: darkgoldenrod;
-font-size: 35px;
+/* background-color: darkgoldenrod; */
+font-family: Bradley Hand, cursive ; 
+font-weight: bold;
+font-size: 70px;
 grid-row: 1/2;
 grid-column: 1 / 3;
+z-index: 2;
+position: relative;
+top: 45px;
+}
+
+.mo-fire {
+    position: absolute;
+    top: -70px;
+    height:200px;
+    z-index: 1;
+    object-position: 50%;
+    width: 900px
+  }
+  
+  #svg-view {
+      width: 200%;
+      height: 100px;
+      /* left: 0px; */
+  }
+  
+  .mo-fire svg {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    right:-15%;
+  }
+  .flame {
+    animation-name: flameDisappear;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0.5;
+    transform-origin: 45% 45% 0;
+  }
+  .flame.one {
+    animation-delay: 1s;
+    animation-duration: 3s;
+  }
+  .flame.two{
+    animation-duration: 5s;
+    animation-delay: 1s;
+  }
+  
+  
+  .flame-main {
+    animation-name: flameMovement;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .flame-main.one {
+    animation-duration: 2.2s;
+    animation-delay: 1s;
+  }
+  .flame-main.two {
+    animation-duration: 2s;
+    animation-delay: 1s;
+  }
+  .flame-main.three {
+    animation-duration: 2.1s;
+    animation-delay: 3s;
+  }
+  .flame-main.four {
+    animation-duration: 3.2s;
+    animation-delay: 4s;
+  }
+  .flame-main.five {
+    animation-duration: 2.5s;
+    animation-delay: 5s;
+  }
+  @keyframes flameMovement {
+    50% {
+      transform: scale(0.98,1.0) translate(0, 2px) rotate(-1deg);
+    }
+  }
+  @keyframes flameDisappear {
+    0%{
+      transform: translate(0) rotate(180deg);
+    }
+    50% {
+       opacity: 1;
+    }
+    100% {
+      transform: translate(-10px, -40px) rotate(180deg);
+      opacity: 0;
+    }
 }
 
 .map{
