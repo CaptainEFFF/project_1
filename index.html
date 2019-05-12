@@ -194,7 +194,7 @@
         
         
 </div>
-<form class="globalSearch"> 
+<!-- <form class="globalSearch"> 
 <div class="search">
         <input type="name" id="city" placeholder="City">
 </div>
@@ -254,8 +254,11 @@
             </select>		
 </div>
 <button type="submit" id= "add-search" class="search">Search</button>
-</form>
-
+</form> -->
+<div id="floating-panel" class="globalSearch">
+    <input id="address" type="textbox" value="Kittery, ME">
+    <input id="submit" type="button" value="Search">
+</div>
 <content id = "map" class="map">This will be a map.</content>
 
 <article class = "yelp yelp1">Yelp Article 1</article>
@@ -272,7 +275,10 @@
 
 <script src='https://www.gstatic.com/firebasejs/5.11.1/firebase.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y&callback=initMap"async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y&callback=initMap"async defer></script> -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y&libraries=visualization&places&callback=waitForClick">
+        </script>
 <script src='assets/javascript/logic.js' async defer></script>
 </body>
 </html>
