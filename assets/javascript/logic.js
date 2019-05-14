@@ -5,6 +5,16 @@ let newQueryURL;
 let timer, timer2, timer3;
 let dataPointArray = [];        // holds the heatmap datapoints
 
+let restaurantArray = [];
+
+class Restaurant {
+    constructor(name, rating) {
+        this.name = name;
+        this.rating = rating;
+    }
+}
+
+
 // waitForClick is the function called when the google libraries are loaded
 // on click the user input is passed to a geocoder function - getQueryURL.
 // the timers are to allow the newQueryURL (the second ajax call, to get the 
@@ -259,13 +269,26 @@ function getPlaceData() {
         method: "GET",
     }).then(function (response) {
         let places = response.results;
-        console.log(places)
+        // console.log(places)
+        // console.log(restaurantArray);
+        let sortedRestaurantArray = places.sort(function (a, b) {
+            if (a.rating > b.rating) {
+                return -1;
+            } else if (a.rating > b.rating) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+
+        console.log(sortedRestaurantArray)
+
         for (var i = 0; i < places.length; i++) {
-            
+
             // temporary variable declarations
             // they only need to be temp b/c the are reset 
             // for each iteration
-            let photo = places[i].photos[0].photo_reference;
+            // let photo = places[i].photos[0].photo_reference;
             let tempLat = places[i].geometry.location.lat;
             let tempLong = places[i].geometry.location.lng;
             let rating = places[i].rating;
@@ -274,14 +297,11 @@ function getPlaceData() {
             let dataPoint = { location: new google.maps.LatLng(tempLat, tempLong), weight: rating };
             dataPointArray.push(dataPoint);
 
-            // this is just a sample restaurant card. For now each card is just crammed onto .yelp1
-            // for demonstration purposes.  The photo is accessed through a src=" URL " where the url is a Places
-            // query using the photo_reference of each response object. 
-            let restaurantCard = `<div><img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><p>` + name + `</p><p>` + rating + `<p/></div>`;
-            $(".yelp1").append(restaurantCard)
         }
+
+
     });
-}  
+}
 
 // displayHeat iterates over the first 10 datapoints in the dataPointArray
 // It is limited to ten for performance, going to dataPointArray.length 
