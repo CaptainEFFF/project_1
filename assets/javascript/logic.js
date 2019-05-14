@@ -270,15 +270,30 @@ function getPlaceData() {
             let tempLong = places[i].geometry.location.lng;
             let rating = places[i].rating;
             let name = places[i].name;
+            let price = places[i].price_level;
+            let location = places[i].vicinity;
+            let reviews = places[i].user_ratings_total;
             // datapoints are in the only form that the heatmap layer api accepts
             let dataPoint = { location: new google.maps.LatLng(tempLat, tempLong), weight: rating };
             dataPointArray.push(dataPoint);
 
+            let dollar = "";
+
+            if (price === 1){
+              dollar = "$";
+            }
+            else if(price === 2){
+              dollar = "$$";
+            }
+
+            else if(price === 3){
+              dollar = "$$$";
+            }
             // this is just a sample restaurant card. For now each card is just crammed onto .yelp1
             // for demonstration purposes.  The photo is accessed through a src=" URL " where the url is a Places
             // query using the photo_reference of each response object. 
-            let restaurantCard = `<div><img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><p>` + name + `</p><p>` + rating + `<p/></div>`;
-            $(".yelp1").append(restaurantCard)
+            let restaurantCard = `<div id = "name">`+ name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "price">` + dollar + `</div><div id = "rating">` + rating + ` (` +reviews + `)`+ `</div><div id = "location">` + location + `</div>`;
+            $(".yelp"+i).append(restaurantCard)
         }
     });
 }  
