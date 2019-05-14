@@ -5,16 +5,6 @@ let newQueryURL;
 let timer, timer2, timer3;
 let dataPointArray = [];        // holds the heatmap datapoints
 
-let restaurantArray = [];
-
-class Restaurant {
-    constructor(name, rating) {
-        this.name = name;
-        this.rating = rating;
-    }
-}
-
-
 // waitForClick is the function called when the google libraries are loaded
 // on click the user input is passed to a geocoder function - getQueryURL.
 // the timers are to allow the newQueryURL (the second ajax call, to get the 
