@@ -267,10 +267,16 @@ function getPlaceData() {
         method: "GET",
     }).then(function (response) {
         let places = response.results;
+
+        // once places is returned, it is sorted by the product of each restaurants
+        // ratings and number of reviews.  This seems to be the best way to capture
+        // the top hot spots and display their data in heatmap form.  
         let sortedRestaurantArray = places.sort(function (a, b) {
-            if (a.rating > b.rating) {
+            let aCombinedScore = a.rating * a.user_ratings_total;
+            let bCombinedScore = b.rating * b.user_ratings_total;
+            if (a.rating * a.user_ratings_total > b.rating * b.user_ratings_total) {
                 return -1;
-            } else if (a.rating < b.rating) {
+            } else if (aCombinedScore < bCombinedScore) {
                 return 1;
             } else {
                 return 0;
@@ -278,7 +284,6 @@ function getPlaceData() {
         })
 
         let filteredResturantArray = sortedRestaurantArray.filter(hasEnoughReviews);
-        console.log(filteredResturantArray);
 
         for (var i = 0; i < filteredResturantArray.length; i++) {
             let photo = filteredResturantArray[i].photos[0].photo_reference;
@@ -290,7 +295,8 @@ function getPlaceData() {
             let location = filteredResturantArray[i].vicinity;
             let reviews = filteredResturantArray[i].user_ratings_total;
             let dollar = "";
-            let dataPoint = { location: new google.maps.LatLng(tempLat, tempLong), weight: rating };
+            let dataPoint = { location: new google.maps.LatLng(tempLat, tempLong), weight: rating * reviews / 20 };
+            let restaurantCard = `<div id = "name">` + name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` + reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
 
             dataPointArray.push(dataPoint);
 
@@ -305,8 +311,8 @@ function getPlaceData() {
                 dollar = "$$$";
             }
 
-            let restaurantCard = `<div id = "name">` + name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` + reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
             $(".yelp" + i).append(restaurantCard);
+
             // remove all event handlers from the div so that on subsequent searches each
             // div starts without any event handlers.  Otherwise they persist and end up multiplying events
             $(".yelp" + i).off();
@@ -327,7 +333,7 @@ function getPlaceData() {
 }
 
 function placeMarker(lat, long, name) {
-    // debugger
+
     var myLatlng = new google.maps.LatLng(lat, long);
     marker = new google.maps.Marker({
         position: myLatlng,
@@ -357,7 +363,8 @@ function displayHeat() {
         map: map,
         dissipating: true,
         gradient: gradient,
-        radius: 10
+        radius: 20,
+        opacity: 1
     })
 
     // after its been used the dataPointArray is emptied to allow for the next search
