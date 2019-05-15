@@ -5,6 +5,32 @@ let newQueryURL;
 let timer, timer2, timer3;
 let dataPointArray = [];        // holds the heatmap datapoints
 
+var firebaseConfig= {
+    apiKey: "AIzaSyD9Xg8IvGTxV3YjAHo6kZC_DbETKok-aJs",
+        authDomain: "piquant-places.firebaseapp.com",
+        databaseURL: "https://piquant-places.firebaseio.com",
+        projectId: "piquant-places",
+        storageBucket: "piquant-places.appspot.com",
+        messagingSenderId: "77839309575",
+        appId: "1:77839309575:web:49f7ccf6d038c866"
+  };
+  
+  /* // Initialize Firebase */
+  firebase.initializeApp(firebaseConfig);
+  
+  var database = firebase.database();
+
+$("#submit").on("click", function(event){
+    event.preventDefault();
+
+    var recentlySearched = $("#address").val();
+
+    database.ref().push({
+        recentlySearched,
+    });
+});
+
+
 // waitForClick is the function called when the google libraries are loaded
 // on click the user input is passed to a geocoder function - getQueryURL.
 // the timers are to allow the newQueryURL (the second ajax call, to get the 
