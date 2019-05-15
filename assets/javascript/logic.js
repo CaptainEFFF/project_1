@@ -274,7 +274,8 @@ function getPlaceData() {
         let sortedRestaurantArray = places.sort(function (a, b) {
             let aCombinedScore = a.rating * a.user_ratings_total;
             let bCombinedScore = b.rating * b.user_ratings_total;
-            if (a.rating * a.user_ratings_total > b.rating * b.user_ratings_total) {
+
+            if (aCombinedScore > bCombinedScore) {
                 return -1;
             } else if (aCombinedScore < bCombinedScore) {
                 return 1;
