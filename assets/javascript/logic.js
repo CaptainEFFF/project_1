@@ -24,6 +24,9 @@ function waitForClick() {
         timer3 = setTimeout(function () {
             displayHeat();
         }, 1000 * 2)
+
+        $(".yelp").empty();
+       
     });
 }
 
@@ -311,7 +314,9 @@ function initMap() {
 
             let restaurantCard = `<div id = "name">`+ name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` +reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
             $(".yelp"+i).append(restaurantCard);
-//             $(".yelp"+i).attr(LatnLong);
+
+            $(".yelp"+i).attr("data-LatnLong",tempLat +" "+tempLong);
+
         }
 
 
