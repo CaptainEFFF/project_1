@@ -292,7 +292,7 @@ function getPlaceData() {
             // this is just a sample restaurant card. For now each card is just crammed onto .yelp1
             // for demonstration purposes.  The photo is accessed through a src=" URL " where the url is a Places
             // query using the photo_reference of each response object. 
-            let restaurantCard = `<div id = "name">`+ name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "price">` + dollar + `</div><div id = "rating">` + rating + ` (` +reviews + `)`+ `</div><div id = "location">` + location + `</div>`;
+            let restaurantCard = `<a id = "name" href>`+ name + `> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` +reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
             $(".yelp"+i).append(restaurantCard)
         }
     });
