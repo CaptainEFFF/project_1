@@ -253,26 +253,49 @@ function initMap() {
 // response object and pushes dataPoint objects to an array that is used to 
 // generate the heatmap points.  The reviews numbers are pushed to a seperate 
 // array that will be used to set the radius of each point as  it is created
-function getPlaceData() {
-    $.ajax({
-        url: newQueryURL,
-        method: "GET",
-    }).then(function (response) {
-        let places = response.results;
-        console.log(places)
+// function getPlaceData() {
+//     $.ajax({
+//         url: newQueryURL,
+//         method: "GET",
+//     }).then(function (response) {
+//         let places = response.results;
+//         console.log(places)
+
+
+
+
+        function getPlaceData() {
+          $.ajax({
+              url: newQueryURL,
+              method: "GET",
+          }).then(function (response) {
+              let places = response.results;
+              // console.log(places)
+              // console.log(restaurantArray);
+              let sortedRestaurantArray = places.sort(function (a, b) {
+                  if (a.rating > b.rating) {
+                      return -1;
+                  } else if (a.rating > b.rating) {
+                      return 1;
+                  } else {
+                      return 0;
+                  }
+              })
+      
+              console.log(sortedRestaurantArray)
         for (var i = 0; i < places.length; i++) {
             
             // temporary variable declarations
             // they only need to be temp b/c the are reset 
             // for each iteration
-            let photo = places[i].photos[0].photo_reference;
-            let tempLat = places[i].geometry.location.lat;
-            let tempLong = places[i].geometry.location.lng;
-            let rating = places[i].rating;
-            let name = places[i].name;
-            let price = places[i].price_level;
-            let location = places[i].vicinity;
-            let reviews = places[i].user_ratings_total;
+            let photo = sortedRestaurantArray[i].photos[0].photo_reference;
+            let tempLat = sortedRestaurantArray[i].geometry.location.lat;
+            let tempLong = sortedRestaurantArray[i].geometry.location.lng;
+            let rating = sortedRestaurantArray[i].rating;
+            let name = sortedRestaurantArray[i].name;
+            let price = sortedRestaurantArray[i].price_level;
+            let location = sortedRestaurantArray[i].vicinity;
+            let reviews = sortedRestaurantArray[i].user_ratings_total;
             // datapoints are in the only form that the heatmap layer api accepts
             let dataPoint = { location: new google.maps.LatLng(tempLat, tempLong), weight: rating };
             dataPointArray.push(dataPoint);
@@ -294,7 +317,7 @@ function getPlaceData() {
             // query using the photo_reference of each response object. 
             let restaurantCard = `<div id = "name">`+ name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` +reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
             $(".yelp"+i).append(restaurantCard);
-            $(".yelp"+i).attr()
+            $(".yelp"+i).attr(LatnLong);
         }
     });
 }  
