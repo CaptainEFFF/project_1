@@ -16,15 +16,15 @@ function waitForClick() {
         let address = document.getElementById('address').value;
         getQueryURL(address);
 
-        timer = setTimeout(function () {
+        timer = setTimeout(function () {        //it might be more approprite to do this with a ajax.done method
             initMap();
-        }, 1000 * .5);
-        timer2 = setTimeout(function () {
+        }, 1000 * .75);
+        timer2 = setTimeout(function () {       //it might be more approprite to do this with a ajax.done method
             getPlaceData();
-        }, 1000 * 1);
-        timer3 = setTimeout(function () {
+        }, 1000 * 1.25);
+        timer3 = setTimeout(function () {       //it might be more approprite to do this with a ajax.done method
             displayHeat();
-        }, 1000 * 2)
+        }, 1000 * 2.25)
 
         $(".yelp").empty();
     });
