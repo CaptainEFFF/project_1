@@ -48,7 +48,7 @@ function getQueryURL(address) {
         lng = response.results[0].geometry.location.lng;
 
         // newQueryURL is the url that will be used in the places ajax call
-        newQueryURL = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=` + lat + `,` + lng + `&radius=1500&type=restaurant&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y`
+        newQueryURL = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=` + lat + `,` + lng + `&radius=3500&type=restaurant&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y`
     });
 }
 
