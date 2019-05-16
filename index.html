@@ -205,13 +205,15 @@
 
 
         </div>
-        
+
         <div id="floating-panel" class="globalSearch">
             <input id="address" type="textbox" value="Kittery, ME">
-            <select id = "recent" name="recent">
-                <option value="none">none</option>
-              </select>
             <input id="submit" type="button" value="Search">
+            <form>
+                <select name="searched" id="recently-searched">
+                    <option label="Recently Searched..." hidden style='display: none' id="recent"></option>
+                </select>
+            </form>
         </div>
         <content id="map" class="map">This will be a map.</content>
 
@@ -220,8 +222,6 @@
         <article class="yelp yelp2"></article>
         <article class="yelp yelp3"></article>
         <article class="yelp yelp4"></article>
-
-
 
     </div>
 

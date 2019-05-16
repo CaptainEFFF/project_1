@@ -5,6 +5,68 @@ let newQueryURL;
 let timer, timer2, timer3;
 let dataPointArray = [];        // holds the heatmap datapoints
 
+var firebaseConfig= {
+    apiKey: "AIzaSyD9Xg8IvGTxV3YjAHo6kZC_DbETKok-aJs",
+        authDomain: "piquant-places.firebaseapp.com",
+        databaseURL: "https://piquant-places.firebaseio.com",
+        projectId: "piquant-places",
+        storageBucket: "piquant-places.appspot.com",
+        messagingSenderId: "77839309575",
+        appId: "1:77839309575:web:49f7ccf6d038c866"
+  };
+  
+  /* // Initialize Firebase */
+  firebase.initializeApp(firebaseConfig);
+  
+  //firebase variable
+  var database = firebase.database();
+  
+  //onclick function to push the userinput to firebase
+  $("#submit").on("click", function(event){
+    event.preventDefault();
+  
+    //variable to user input value
+    var recentlySearched = $("#address").val();
+    //pushing user input to firebase and storing it under a key
+    database.ref().push({
+        recentlySearched,
+    });
+    });
+
+    //limiting the most recent 3 on load for the dropdown.
+    database.ref().limitToLast(3).on("child_added",
+     function(snapshot){
+         //creating the new option
+        var newSite = $("<option id='recent'>").text(snapshot.val().recentlySearched);
+        //appending the new option   
+        $("#recently-searched").append(newSite);
+
+     });
+
+     //variable for the recent search and event listener to see the change in dropdown selection
+     var recentOption = document.getElementById('recently-searched');
+     recentOption.addEventListener("change", dropDown);
+
+     //function to run when the dropdown is changed.
+     function dropDown(event) {
+            let address = document.getElementById('recent').value;
+        getQueryURL(address);
+
+        timer = setTimeout(function () {
+            initMap();
+        }, 1000 * .5);
+        timer2 = setTimeout(function () {
+            getPlaceData();
+        }, 1000 * 1);
+        timer3 = setTimeout(function () {
+            displayHeat();
+        }, 1000 * 2)
+        
+        $(".yelp").empty();
+         }
+         
+     
+
 // waitForClick is the function called when the google libraries are loaded
 // on click the user input is passed to a geocoder function - getQueryURL.
 // the timers are to allow the newQueryURL (the second ajax call, to get the 
