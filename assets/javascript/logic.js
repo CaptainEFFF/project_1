@@ -297,10 +297,6 @@ function getPlaceData() {
             let reviews = filteredResturantArray[i].user_ratings_total;
             let dollar = "";
             let dataPoint = { location: new google.maps.LatLng(tempLat, tempLong), weight: rating * reviews / 20 };
-            let restaurantCard = `<div id = "name">` + name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` + reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
-
-            dataPointArray.push(dataPoint);
-
             if (price === 1) {
                 dollar = "$";
             }
@@ -311,6 +307,10 @@ function getPlaceData() {
             else if (price === 3) {
                 dollar = "$$$";
             }
+            let restaurantCard = `<div id = "name">` + name + `</div> <img id = "photo" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=` + photo + `&key=AIzaSyD9y2VmteYeNrLjnmKgP8l1j0DIp2qex9Y"><div id = "rating">` + rating + ` (` + reviews + `) | ` + dollar + `</div><div id = "location">` + location + `</div>`;
+
+            dataPointArray.push(dataPoint);
+
 
             $(".yelp" + i).append(restaurantCard);
 
