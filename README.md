@@ -5,35 +5,26 @@ Project Title: Piquant Places
 Team Name: Cayenne Quartet
 Team Members: Kyle Whittemore, Andrew Anc, David Ross Banville, Katie Hennessey
 
-Project Description: our app will take user input for their location, list out resturants based on the Yelp reviews, listing the star reviews and return a heat map index based on the level of stars the restaurants have earned. 
+Project Description: our app will take user input for their location, list out resturants based on the reviews, listing the star reviews, price index, address and return a heat map index based on the level of stars the restaurants have earned. When the card is hovered over a pin will drop on the map.
 
-Library: heatmapjs 
+Library: external libraries
 
-Technology: CSS Grid 
+Technology: CSS Grid, SVG handling for the animation
 
 Sketch outline:
-Firebase: recent location search of off userinput; 
+Firebase: recent location search of off userinput;
 Dynamic page;
-User input validation ( enter correct information for search by town/city, state, zip code)
-repeating element: table with yelp reviews
+User input validation ( enter correct information for search by town/city, state)
+repeating element: table with reviews, prices, location
 
 
 API's to be used:
 
 Google Maps API: heatmap plugin that links to  maps
-    
-yelp api: ( restaurant reviews/star reviews)
+Google Places api: ( restaurant reviews/star reviews)
+Google GeoCoder for the Lat/Long
 
 Breakdown of tasks:
-Tuesday/Wednesday
-Kyle: heatmapjs
-Andrew: Google Maps API
-David: Yelp API
-Katie: CSS Grid
+Kyle and Andrew worked the backend: implementing the API's, JQuery, Firebase
 
-Thursday Tasks:
-Bring together our research and apply it to the code
-html id's, 
-css layout: tables, containers, 
-Front-end: David and Katie
-Back-End: Andrew and Kyle
+David and Katie worked on frontend: designing the page layout and UI
