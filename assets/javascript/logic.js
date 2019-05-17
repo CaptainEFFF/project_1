@@ -1,3 +1,4 @@
+$(".hideMe").hide();
 
 let map, heatmap, service;
 let lat, lng;
@@ -5,7 +6,6 @@ let newQueryURL;
 let timer, timer2, timer3;
 let dataPointArray = [];
 let marker;
-
 var firebaseConfig = {
     apiKey: "AIzaSyD9Xg8IvGTxV3YjAHo6kZC_DbETKok-aJs",
     authDomain: "piquant-places.firebaseapp.com",
@@ -18,6 +18,7 @@ var firebaseConfig = {
 
 /* // Initialize Firebase */
 firebase.initializeApp(firebaseConfig);
+
 
 //firebase variable
 var database = firebase.database();
@@ -47,7 +48,7 @@ function waitForClick() {
         timer3 = setTimeout(function () {       //it might be more approprite to do this with a ajax.done method
             displayHeat();
         }, 1000 * 2.25)
-
+        $(".hideMe").show();
         $(".yelp").empty();
     });
 }
@@ -64,6 +65,7 @@ database.ref().limitToLast(3).on("child_added",
 //variable for the recent search and event listener to see the change in dropdown selection
 var recentOption = document.getElementById('recently-searched');
 recentOption.addEventListener("change", function () {
+    $(".hideMe").show();
   dropDown();
 });
 
